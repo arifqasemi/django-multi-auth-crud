@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block action %}
+{% comment %} {% if user.is_admin %} {% endcomment %}
+<a href="{% url "add" %}" class="btn btn-primary">Add Task</a>
+{% comment %} {% endif %} {% endcomment %}
+{% endblock  %}
+{% block content %}
+<div class="container">
+    {% if task %}
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for t in task %}
+
+          <tr>
+            <th scope="row">{{ t.id }}</th>
+            <td>{{ t.title }}</td>
+            <td>{{ t.description }}</td>
+            <td><a href="{% url 'updateTask' t.id %}" class="btn btn-primary btn-sm">Edit</a> <a href="{% url 'deleteTask' t.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+          </tr>
+          {% endfor %}
+          {% else %}
+          <p>No tasks available.</p>
+      {% endif %}
+        </tbody>
+      </table>
+        
+   
+</div>
+{% endblock %}
